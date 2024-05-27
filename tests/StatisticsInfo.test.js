@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react-native";
 import StatisticsInfo from "../components/StatisticsInfo";
 import words from "./testData";
 import MyWords from "../data/words";
-console.log(MyWords);
 
 MyWords.splice(0, MyWords.length);
 MyWords.push(...words);

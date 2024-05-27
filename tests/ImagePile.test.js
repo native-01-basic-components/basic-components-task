@@ -11,7 +11,15 @@ jest.mock("react-native", () => {
   return Object.setPrototypeOf(
     {
       Image: ({ style }) => (
-        <actualReactNative.Text style={{ position: style.position }}>
+        <actualReactNative.Text
+          style={{
+            position:
+              style.position ??
+              style[0]?.position ??
+              style[1]?.position ??
+              style[2]?.position,
+          }}
+        >
           image
         </actualReactNative.Text>
       ),
@@ -24,6 +32,8 @@ test(`ImagePile, images can be placed according to requirement`, async () => {
   render(<ImagePile />);
 
   const images = screen.getAllByText("image");
-  expect(images).toHaveLength(5)
-  expect(images.some(image => image.props.style.position === "absolute")).toBeTruthy()
+  expect(images).toHaveLength(5);
+  expect(
+    images.some((image) => image.props.style.position === "absolute")
+  ).toBeTruthy();
 });
